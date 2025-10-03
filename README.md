@@ -21,10 +21,20 @@
    - Never commit `.env` to Git.
 
 3. Run the server:
-   ```bash
-   npm start
-   ```
+   - Development (auto-restart on save):
+     ```bash
+     npm run dev
+     ```
+   - Production:
+     ```bash
+     npm start
+     ```
    - Visit `http://localhost:5000`
+
+### Scripts
+
+- `npm run dev`: Starts the server with nodemon for development.
+- `npm start`: Starts the server with Node for production/simple runs.
 
 ### Routes
 
