@@ -11,7 +11,7 @@
    ```bash
    npm install
    ```
-2. Create a `.env` file in the project root based on `.env.example`:
+2. Create a `.env` file in the project root:
 
    ```ini
    PORT=5000
