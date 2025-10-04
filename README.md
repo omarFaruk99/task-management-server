@@ -78,6 +78,14 @@ The API will be available at `http://localhost:5000`.
 
 ---
 
+## API Documentation
+
+This project uses Swagger to generate interactive API documentation. Once the server is running, you can view and test all the available endpoints by visiting:
+
+**[http://localhost:5000/api-docs](http://localhost:5000/api-docs)**
+
+---
+
 ## API Endpoints
 
 All API endpoints are prefixed with `/api`.
