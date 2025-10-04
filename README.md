@@ -32,12 +32,14 @@ Follow these instructions to get a copy of the project up and running on your lo
 ### Installation & Setup
 
 1.  **Clone the repository**
+
     ```bash
-    git clone <your-repository-url>
+    git clone https://github.com/omarFaruk99/task-management-server>
     cd task-management-server
     ```
 
 2.  **Install dependencies**
+
     ```bash
     npm install
     ```
@@ -56,19 +58,21 @@ Follow these instructions to get a copy of the project up and running on your lo
     # A secret key for signing JWTs (can be any long, random string)
     JWT_SECRET="your_super_secret_jwt_key"
     ```
+
     > **Note**: `.env` files should never be committed to Git.
 
 ### Running the Application
 
--   **Development Mode**: Starts the server with `nodemon`, which automatically restarts on file changes.
-    ```bash
-    npm run dev
-    ```
+- **Development Mode**: Starts the server with `nodemon`, which automatically restarts on file changes.
 
--   **Production Mode**: Starts the server with `node`.
-    ```bash
-    npm start
-    ```
+  ```bash
+  npm run dev
+  ```
+
+- **Production Mode**: Starts the server with `node`.
+  ```bash
+  npm start
+  ```
 
 The API will be available at `http://localhost:5000`.
 
@@ -84,53 +88,53 @@ All API endpoints are prefixed with `/api`.
 
 Registers a new user.
 
--   **Request Body**:
-    ```json
-    {
+- **Request Body**:
+  ```json
+  {
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "password123",
+    "age": 30
+  }
+  ```
+- **Success Response (201)**:
+  ```json
+  {
+    "message": "User registered successfully",
+    "user": {
+      "_id": "60d5f2f5c7b5f3b2c8f5e8a1",
       "name": "John Doe",
       "email": "john.doe@example.com",
-      "password": "password123",
       "age": 30
-    }
-    ```
--   **Success Response (201)**:
-    ```json
-    {
-      "message": "User registered successfully",
-      "user": {
-        "_id": "60d5f2f5c7b5f3b2c8f5e8a1",
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "age": 30
-      },
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-    }
-    ```
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  }
+  ```
 
 #### `POST /users/login`
 
 Logs in an existing user.
 
--   **Request Body**:
-    ```json
-    {
+- **Request Body**:
+  ```json
+  {
+    "email": "john.doe@example.com",
+    "password": "password123"
+  }
+  ```
+- **Success Response (200)**:
+  ```json
+  {
+    "message": "Login successful",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "user": {
+      "_id": "60d5f2f5c7b5f3b2c8f5e8a1",
+      "name": "John Doe",
       "email": "john.doe@example.com",
-      "password": "password123"
+      "age": 30
     }
-    ```
--   **Success Response (200)**:
-    ```json
-    {
-      "message": "Login successful",
-      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-      "user": {
-        "_id": "60d5f2f5c7b5f3b2c8f5e8a1",
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "age": 30
-      }
-    }
-    ```
+  }
+  ```
 
 ### Users
 
@@ -138,33 +142,33 @@ Logs in an existing user.
 
 Gets the profile of the currently authenticated user.
 
--   **Authentication**: `Bearer Token` required.
--   **Success Response (200)**:
-    ```json
+- **Authentication**: `Bearer Token` required.
+- **Success Response (200)**:
+  ```json
+  {
+    "_id": "60d5f2f5c7b5f3b2c8f5e8a1",
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "age": 30
+  }
+  ```
+
+#### `GET /users`
+
+Gets a list of all registered users.
+
+- **Authentication**: None.
+- **Success Response (200)**:
+  ```json
+  [
     {
       "_id": "60d5f2f5c7b5f3b2c8f5e8a1",
       "name": "John Doe",
       "email": "john.doe@example.com",
       "age": 30
     }
-    ```
-
-#### `GET /users`
-
-Gets a list of all registered users.
-
--   **Authentication**: None.
--   **Success Response (200)**:
-    ```json
-    [
-      {
-        "_id": "60d5f2f5c7b5f3b2c8f5e8a1",
-        "name": "John Doe",
-        "email": "john.doe@example.com",
-        "age": 30
-      }
-    ]
-    ```
+  ]
+  ```
 
 ### Tasks
 
@@ -174,84 +178,84 @@ Gets a list of all registered users.
 
 Creates a new task for the authenticated user.
 
--   **Request Body**:
-    ```json
-    {
+- **Request Body**:
+  ```json
+  {
+    "title": "Finish project documentation",
+    "description": "Update the README and add Swagger docs.",
+    "status": "in-progress",
+    "dueDate": "2025-12-31"
+  }
+  ```
+- **Success Response (201)**:
+  ```json
+  {
+    "message": "Task created",
+    "task": {
+      "_id": "60d5f3a0c7b5f3b2c8f5e8a2",
       "title": "Finish project documentation",
-      "description": "Update the README and add Swagger docs.",
       "status": "in-progress",
-      "dueDate": "2025-12-31"
+      "user": "60d5f2f5c7b5f3b2c8f5e8a1",
+      ...
     }
-    ```
--   **Success Response (201)**:
-    ```json
-    {
-      "message": "Task created",
-      "task": {
-        "_id": "60d5f3a0c7b5f3b2c8f5e8a2",
-        "title": "Finish project documentation",
-        "status": "in-progress",
-        "user": "60d5f2f5c7b5f3b2c8f5e8a1",
-        ...
-      }
-    }
-    ```
+  }
+  ```
 
 #### `GET /tasks`
 
 Retrieves all tasks for the authenticated user.
 
--   **Query Parameters**:
-    -   `status` (optional): Filter tasks by status (`pending`, `in-progress`, `completed`).
-    -   `dueDate` (optional): Filter tasks by due date (e.g., `2025-12-31`).
--   **Success Response (200)**:
-    ```json
-    [
-      {
-        "_id": "60d5f3a0c7b5f3b2c8f5e8a2",
-        "title": "Finish project documentation",
-        "status": "in-progress",
-        ...
-      }
-    ]
-    ```
+- **Query Parameters**:
+  - `status` (optional): Filter tasks by status (`pending`, `in-progress`, `completed`).
+  - `dueDate` (optional): Filter tasks by due date (e.g., `2025-12-31`).
+- **Success Response (200)**:
+  ```json
+  [
+    {
+      "_id": "60d5f3a0c7b5f3b2c8f5e8a2",
+      "title": "Finish project documentation",
+      "status": "in-progress",
+      ...
+    }
+  ]
+  ```
 
 #### `PUT /tasks/:id`
 
 Updates an existing task.
 
--   **URL Parameter**:
-    -   `id`: The ID of the task to update.
--   **Request Body**:
-    ```json
-    {
-      "status": "completed"
+- **URL Parameter**:
+  - `id`: The ID of the task to update.
+- **Request Body**:
+  ```json
+  {
+    "status": "completed"
+  }
+  ```
+- **Success Response (200)**:
+  ```json
+  {
+    "message": "Task updated",
+    "task": {
+      "_id": "60d5f3a0c7b5f3b2c8f5e8a2",
+      "status": "completed",
+      ...
     }
-    ```
--   **Success Response (200)**:
-    ```json
-    {
-      "message": "Task updated",
-      "task": {
-        "_id": "60d5f3a0c7b5f3b2c8f5e8a2",
-        "status": "completed",
-        ...
-      }
-    }
-    ```
+  }
+  ```
 
 #### `DELETE /tasks/:id`
 
 Deletes a task.
 
--   **URL Parameter**:
-    -   `id`: The ID of the task to delete.
--   **Success Response (200)**:
-    ```json
-    {
-      "message": "Task deleted"
-    }
-    ```
+- **URL Parameter**:
+  - `id`: The ID of the task to delete.
+- **Success Response (200)**:
+  ```json
+  {
+    "message": "Task deleted"
+  }
+  ```
 
 ---
 
