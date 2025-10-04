@@ -16,13 +16,11 @@ app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Routes
 app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/tasks", require("./routes/taskRoutes"));
 
 // Basic route
 app.get("/", (req, res) => {
-  res.json({
-    message: "Welcome to Express + Mongoose API",
-    timestamp: new Date().toISOString(),
-  });
+  res.json({ message: "Welcome to the Task Management API" });
 });
 
 // 404 handler
@@ -37,6 +35,6 @@ app.use((error, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
   console.log(`Visit: http://localhost:${PORT}`);
 });
